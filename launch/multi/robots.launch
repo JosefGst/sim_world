@@ -4,39 +4,42 @@
   <arg name="model" default="deliverybot"/>
 
   <param name="robot_description"
-    command="$(find xacro)/xacro $(find robo_base_description)/urdf/$(arg model).urdf.xacro" />
+    command="$(find xacro)/xacro $(find urdf_basic_shapes)/examples/$(arg model).urdf.xacro" />
 
   <!-- <arg name="model" default="$(env TURTLEBOT3_MODEL)" doc="model type [burger, waffle, waffle_pi]"/>
   <param name="robot_description"
     command="$(find xacro)/xacro $(find turtlebot3_description)/urdf/turtlebot3_$(arg model).urdf.xacro" /> -->
 
   <!-- BEGIN ROBOT 1-->
-  <group ns="robot1">
-    <param name="tf_prefix" value="robot1" />
-    <include file="$(find robo_base_gazebo)/launch/multi/one_robot.launch" >
+  <arg name="robot1" default="robot1"/>
+  <group ns="$(arg robot1)">
+    <param name="tf_prefix" value="$(arg robot1)" />
+    <include file="$(find sim_world)/launch/multi/one_robot.launch" >
       <arg name="init_pose" value="-x -30 -y -10 -z 0" />
-      <arg name="robot_name"  value="robot1" />
+      <arg name="robot_name"  value="$(arg robot1)" />
       <arg name="model"  value="$(arg model)" />
     </include>
   </group>
 
   <!-- BEGIN ROBOT 2-->
-  <group ns="robot2">
-    <param name="tf_prefix" value="robot2" />
-    <include file="$(find robo_base_gazebo)/launch/multi/one_robot.launch" >
-      <arg name="init_pose" value="-x 40 -y -7 -z 0" />
-      <arg name="robot_name"  value="robot2" />
+  <arg name="robot2" default="robot2"/>
+  <group ns="$(arg robot2)">
+    <param name="tf_prefix" value="$(arg robot2)" />
+    <include file="$(find sim_world)/launch/multi/one_robot.launch" >
+      <arg name="init_pose" value="-x 0.5 -y 3 -z 0" />
+      <arg name="robot_name"  value="$(arg robot2)" />
       <arg name="model"  value="$(arg model)" />
     </include>
   </group>
 
 
 <!-- BEGIN ROBOT 3-->
-  <group ns="robot3">
-    <param name="tf_prefix" value="robot3" />
-    <include file="$(find robo_base_gazebo)/launch/multi/one_robot.launch" >
-      <arg name="init_pose" value="-x 0.5 -y 3 -z 0" />
-      <arg name="robot_name"  value="robot3" />
+  <arg name="robot3" default="robot3"/>
+  <group ns="$(arg robot3)">
+    <param name="tf_prefix" value="$(arg robot3)" />
+    <include file="$(find sim_world)/launch/multi/one_robot.launch" >
+      <arg name="init_pose" value="-x 40 -y -7 -z 0" />
+      <arg name="robot_name"  value="$(arg robot3)" />
       <arg name="model"  value="$(arg model)" />
     </include>
   </group>

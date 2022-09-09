@@ -1,16 +1,16 @@
 <launch>
   <param name="/use_sim_time" value="true" />
-  <arg name="model" default="tko_robot"/>
+  <arg name="model" default="deliverybot"/>
 
   <!-- start world -->
   <node name="gazebo" pkg="gazebo_ros" type="gazebo" 
-   args="$(find robo_base_gazebo)/worlds/hospital_LG.world" respawn="false" output="screen" />
+   args="$(find sim_world)/worlds/hospital_LG.world" respawn="false" output="screen" />
 
   <!-- start gui -->
   <!-- <node name="gazebo_gui" pkg="gazebo" type="gui" respawn="false" output="screen"/> -->
 
-  <!-- include our robots -->
-  <include file="$(find robo_base_gazebo)/launch/multi/robots.launch">
+  <!-- include robots -->
+  <include file="$(find sim_world)/launch/multi/robots.launch">
     <arg name="model" value="$(arg model)"/>
   </include>
 </launch>

@@ -3,7 +3,7 @@
     <arg name="init_pose"/>
     <arg name="model"/>
 
-    <node name="spawn_minibot_model" pkg="gazebo_ros" type="spawn_model"
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model"
      args="$(arg init_pose) -urdf -param /robot_description -model $(arg robot_name)"
      respawn="false" output="screen" />
 
@@ -15,9 +15,9 @@
     <!-- The odometry estimator, throttling, fake laser etc. go here -->
     <!-- All the stuff as from usual robot launch file -->
 
-    <group if="$(eval arg('model') == 'tko_robot')">
+    <!-- <group if="$(eval arg('model') == 'tko_robot')">
         <include file="$(find robo_base_bringup)/launch/merge_laser_tko.launch">
             <arg name="robot_name" value="$(arg robot_name)"/>
         </include>
-    </group>
+    </group> -->
 </launch>
