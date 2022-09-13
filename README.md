@@ -7,4 +7,4 @@ gazebo worlds for robot simulation
 ![alt text](https://github.com/JosefGst/sim_world/blob/main/images/hospital.png)
 
 ## dependencies
-uses robot models form **urdf_basic_shapes**
+uses robot models form [urdf_basic_shapes](https://github.com/JosefGst/urdf_basic_shapes.git)
