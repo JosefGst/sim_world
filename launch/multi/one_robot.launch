@@ -15,8 +15,14 @@
     <!-- The odometry estimator, throttling, fake laser etc. go here -->
     <!-- All the stuff as from usual robot launch file -->
 
+    <!-- laser filter -->
     <node pkg="laser_filters" type="scan_to_scan_filter_chain" output="screen" name="laser_filter">
-      <rosparam command="load" file="$(find deliverybot_nav)/param/laser_filter.yaml" />
-      <remap from="scan" to="scan" />
-  </node>
+        <rosparam command="load" file="$(find deliverybot_nav)/param/laser_filter.yaml" />
+        <remap from="scan" to="scan" />
+    </node>
+
+    <!-- ekf -->
+    <remap from="odometry/filtered" to="odom_ekf"/>
+    <include file="$(find deliverybot_bringup)/launch/robot_localization.launch"/>
+
 </launch>
