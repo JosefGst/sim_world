@@ -16,10 +16,10 @@ import os
 def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
     pkg_share = launch_ros.substitutions.FindPackageShare(package='urdf_basic_shapes').find('urdf_basic_shapes')
-    # sim_world_pkg = launch_ros.substitutions.FindPackageShare(package='sim_world').find('sim_world')
+    sim_world_pkg = launch_ros.substitutions.FindPackageShare(package='sim_world').find('sim_world')
     default_model_path = os.path.join(pkg_share, 'examples/basic_example.urdf.xacro') 
     default_rviz_config_path = os.path.join(pkg_share, 'rviz/urdf.rviz')
-    # world_path=os.path.join(sim_world_pkg, 'world/new_world.world')
+    world_path=os.path.join(sim_world_pkg, 'world/new_world.sdf')
 
     gui_arg = DeclareLaunchArgument(name='gui', default_value='false', choices=['true', 'false'],
                                     description='Flag to enable joint_state_publisher_gui')
@@ -67,7 +67,7 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
-        ExecuteProcess(cmd=['gazebo', '--verbose', '-s', 'libgazebo_ros_init.so', '-s', 'libgazebo_ros_factory.so'], output='screen'),
+        ExecuteProcess(cmd=['gazebo', '--verbose', '-s', 'libgazebo_ros_init.so', '-s', 'libgazebo_ros_factory.so', world_path], output='screen'),
         gui_arg,
         model_arg,
         rviz_arg,
