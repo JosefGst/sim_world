@@ -60,23 +60,24 @@ def generate_launch_description():
         output='screen'
     )
 
-    rviz_node = Node(
-        package='rviz2',
-        executable='rviz2',
-        name='rviz2',
-        output='screen',
-        arguments=['-d', LaunchConfiguration('rvizconfig')],
-        condition=IfCondition(LaunchConfiguration('gui'))
-    )
+    # rviz_node = Node(
+    #     package='rviz2',
+    #     executable='rviz2',
+    #     name='rviz2',
+    #     output='screen',
+    #     arguments=['-d', LaunchConfiguration('rvizconfig')],
+    #     condition=IfCondition(LaunchConfiguration('open_rviz'))
+    # )
 
     return LaunchDescription([
         ExecuteProcess(cmd=['gazebo', '--verbose', '-s', 'libgazebo_ros_init.so', '-s', 'libgazebo_ros_factory.so', world_path], output='screen'),
+        # open_rviz_arg,
         gui_arg,
         model_arg,
-        rviz_arg,
+        # rviz_arg,
         joint_state_publisher_node,
         joint_state_publisher_gui_node,
         robot_state_publisher_node,
         spawn_entity,
-        rviz_node
+        # rviz_node
     ])
