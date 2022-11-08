@@ -17,10 +17,12 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
     pkg_share = launch_ros.substitutions.FindPackageShare(package='urdf_basic_shapes').find('urdf_basic_shapes')
     sim_world_pkg = launch_ros.substitutions.FindPackageShare(package='sim_world').find('sim_world')
-    default_model_path = os.path.join(pkg_share, 'examples/basic_example.urdf.xacro') 
+    default_model_path = os.path.join(pkg_share, 'examples/deliverybot.urdf.xacro') 
     default_rviz_config_path = os.path.join(pkg_share, 'rviz/urdf.rviz')
     world_path=os.path.join(sim_world_pkg, 'world/house.sdf')
 
+    open_rviz_arg = DeclareLaunchArgument(name='open_rviz', default_value='false', choices=['true', 'false'],
+                                    description='Flag to open rviz')
     gui_arg = DeclareLaunchArgument(name='gui', default_value='false', choices=['true', 'false'],
                                     description='Flag to enable joint_state_publisher_gui')
     model_arg = DeclareLaunchArgument(name='model', default_value=str(default_model_path),
@@ -64,6 +66,7 @@ def generate_launch_description():
         name='rviz2',
         output='screen',
         arguments=['-d', LaunchConfiguration('rvizconfig')],
+        condition=IfCondition(LaunchConfiguration('gui'))
     )
 
     return LaunchDescription([
