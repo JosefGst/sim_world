@@ -19,7 +19,7 @@ def generate_launch_description():
     sim_world_pkg = launch_ros.substitutions.FindPackageShare(package='sim_world').find('sim_world')
     default_model_path = os.path.join(pkg_share, 'examples/basic_example.urdf.xacro') 
     default_rviz_config_path = os.path.join(pkg_share, 'rviz/urdf.rviz')
-    world_path=os.path.join(sim_world_pkg, 'world/new_world.sdf')
+    world_path=os.path.join(sim_world_pkg, 'world/house.sdf')
 
     gui_arg = DeclareLaunchArgument(name='gui', default_value='false', choices=['true', 'false'],
                                     description='Flag to enable joint_state_publisher_gui')
