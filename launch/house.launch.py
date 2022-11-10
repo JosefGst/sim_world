@@ -60,6 +60,14 @@ def generate_launch_description():
         output='screen'
     )
 
+    ekf_node = launch_ros.actions.Node(
+            package='robot_localization',
+            executable='ekf_node',
+            name='ekf_filter_node',
+            output='screen',
+            parameters=[os.path.join(sim_world_pkg, 'param/ekf.yaml'), {'use_sim_time': use_sim_time}]
+    )
+
     # rviz_node = Node(
     #     package='rviz2',
     #     executable='rviz2',
@@ -79,5 +87,6 @@ def generate_launch_description():
         joint_state_publisher_gui_node,
         robot_state_publisher_node,
         spawn_entity,
+        ekf_node,
         # rviz_node
     ])
