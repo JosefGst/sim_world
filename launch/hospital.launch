@@ -18,5 +18,10 @@
 
     <param name="robot_description" command="$(find xacro)/xacro $(find urdf_basic_shapes)/examples/$(arg model).urdf.xacro" />
 
+    <!-- robo_base state publisher-->
+    <include file="$(find bringup)/launch/remote.launch">
+      <arg name="model" value="$(arg model)" />
+    </include>
+
     <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf"  args="-urdf -param robot_description -model $(arg model) -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -Y $(arg yaw)" />
 </launch>
